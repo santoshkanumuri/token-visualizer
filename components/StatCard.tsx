@@ -20,8 +20,8 @@ const StatCard: React.FC<StatCardProps> = ({
 }) => {
   const getTrendColor = () => {
     switch (trend) {
-      case 'up': return 'text-green-500 dark:text-green-400';
-      case 'down': return 'text-red-500 dark:text-red-400';
+      case 'up': return 'text-orange-500 dark:text-orange-400';
+      case 'down': return 'text-blue-500 dark:text-blue-400';
       default: return 'text-slate-500 dark:text-slate-400';
     }
   };

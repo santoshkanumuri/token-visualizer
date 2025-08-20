@@ -93,7 +93,7 @@ export default function App() {
   return (
     <div className="h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300 flex flex-col w-full p-4 sm:p-6 lg:p-8 overflow-hidden">
       <header className="relative text-center mb-6">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-purple-600 dark:from-sky-400 dark:to-purple-500 pb-2">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-blue-600 dark:from-orange-400 dark:to-blue-500 pb-2">
           LLM Token Visualizer
         </h1>
         <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
@@ -119,19 +119,19 @@ export default function App() {
           label="Tokens"
           value={stats.tokens}
           subtitle={stats.analysis ? `Avg: ${stats.analysis.avgLength} chars` : undefined}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-purple-500 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V4m0 16v-2M8 12a4 4 0 118 0 4 4 0 01-8 0z" /></svg>}
+          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V4m0 16v-2M8 12a4 4 0 118 0 4 4 0 01-8 0z" /></svg>}
         />
         <StatCard
           label="Words"
           value={stats.words}
           subtitle={stats.analysis ? `${Math.round((stats.analysis.categories.words / stats.tokens) * 100)}% of tokens` : undefined}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-sky-500 dark:text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
+          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
         />
         <StatCard
           label="Characters"
           value={stats.characters}
           subtitle={stats.analysis ? `Efficiency: ${stats.analysis.efficiency}` : undefined}
-          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m16-10v10M9 3h6l3 4-3 4H9L6 7l3-4z" /></svg>}
+          icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600 dark:text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m16-10v10M9 3h6l3 4-3 4H9L6 7l3-4z" /></svg>}
         />
       </div>
 
@@ -141,7 +141,7 @@ export default function App() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter text here to see the magic..."
-            className="w-full h-full p-4 bg-white/50 dark:bg-slate-950/70 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-600 text-lg leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-300 font-mono backdrop-blur-sm overflow-y-auto"
+            className="w-full h-full p-4 bg-white/50 dark:bg-slate-950/70 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-600 text-lg leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 font-mono backdrop-blur-sm overflow-y-auto"
           />
            <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <IconButton 

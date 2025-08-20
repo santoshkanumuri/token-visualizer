@@ -1,22 +1,22 @@
 
 export const DARK_TOKEN_COLORS = [
-  'bg-red-900/50 text-red-300 border border-red-500/20',
-  'bg-sky-900/50 text-sky-300 border border-sky-500/20',
-  'bg-green-900/50 text-green-300 border border-green-500/20',
-  'bg-yellow-900/50 text-yellow-300 border border-yellow-500/20',
-  'bg-purple-900/50 text-purple-300 border border-purple-500/20',
-  'bg-pink-900/50 text-pink-300 border border-pink-500/20',
-  'bg-indigo-900/50 text-indigo-300 border border-indigo-500/20',
+  'bg-orange-900/50 text-orange-300 border border-orange-500/20',
+  'bg-blue-900/50 text-blue-300 border border-blue-500/20',
+  'bg-orange-800/50 text-orange-200 border border-orange-400/20',
+  'bg-blue-800/50 text-blue-200 border border-blue-400/20',
+  'bg-orange-700/50 text-orange-100 border border-orange-300/20',
+  'bg-blue-700/50 text-blue-100 border border-blue-300/20',
+  'bg-slate-700/50 text-slate-200 border border-slate-500/20',
 ];
 
 export const LIGHT_TOKEN_COLORS = [
-  'bg-red-100 text-red-900 border border-red-200',
-  'bg-sky-100 text-sky-900 border border-sky-200',
-  'bg-green-100 text-green-900 border border-green-200',
-  'bg-yellow-100 text-yellow-800 border border-yellow-200',
-  'bg-purple-100 text-purple-900 border border-purple-200',
-  'bg-pink-100 text-pink-900 border border-pink-200',
-  'bg-indigo-100 text-indigo-900 border border-indigo-200',
+  'bg-orange-100 text-orange-900 border border-orange-200',
+  'bg-blue-100 text-blue-900 border border-blue-200',
+  'bg-orange-200 text-orange-800 border border-orange-300',
+  'bg-blue-200 text-blue-800 border border-blue-300',
+  'bg-orange-300 text-orange-700 border border-orange-400',
+  'bg-blue-300 text-blue-700 border border-blue-400',
+  'bg-slate-200 text-slate-800 border border-slate-300',
 ];
 
 export const DEFAULT_TEXT = `Welcome to the LLM Token Visualizer!
