@@ -148,18 +148,21 @@ export default function App() {
           label="Tokens"
           value={stats.tokens}
           subtitle={stats.analysis ? `Avg: ${stats.analysis.avgLength} chars` : undefined}
+          helpText="Number of tokens generated from your text. Tokens are the basic units that AI models use to process text. Words, punctuation, and spaces can become separate tokens."
           icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-500 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V4m0 16v-2M8 12a4 4 0 118 0 4 4 0 01-8 0z" /></svg>}
         />
         <StatCard
           label="Words"
           value={stats.words}
           subtitle={stats.analysis ? `${Math.round((stats.analysis.categories.words / stats.tokens) * 100)}% of tokens` : undefined}
+          helpText="Traditional word count (space-separated). The percentage shows how many of your tokens are actual words vs. punctuation, numbers, or special characters."
           icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>}
         />
         <StatCard
           label="Characters"
           value={stats.characters}
           subtitle={stats.analysis ? `Efficiency: ${stats.analysis.efficiency}` : undefined}
+          helpText="Total character count including spaces and punctuation. Efficiency shows the average characters per token - higher values indicate more efficient tokenization."
           icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600 dark:text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m16-10v10M9 3h6l3 4-3 4H9L6 7l3-4z" /></svg>}
         />
         
@@ -170,14 +173,46 @@ export default function App() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
             </svg>
             <h2 className="text-lg font-semibold text-orange-800 dark:text-orange-200">Cost Calculator</h2>
+            <div className="relative group">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                className="h-4 w-4 text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 cursor-help transition-colors" 
+                fill="none" 
+                viewBox="0 0 24 24" 
+                stroke="currentColor"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-64 text-center">
+                Calculate the estimated cost of using AI APIs based on token count and pricing. Different AI providers charge per million tokens.
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800 dark:border-t-slate-700"></div>
+              </div>
+            </div>
           </div>
           
           <div className="space-y-3">
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
               <div className="space-y-1">
-                <label htmlFor="cost-input" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
-                  Cost per 1M tokens ($)
-                </label>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="cost-input" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
+                    Cost per 1M tokens ($)
+                  </label>
+                  <div className="relative group">
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="h-3 w-3 text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 cursor-help transition-colors" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-56 text-center">
+                      Enter the cost per million tokens for your AI provider. Examples: GPT-4 (~$30), GPT-3.5 (~$2), Claude (~$11).
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800 dark:border-t-slate-700"></div>
+                    </div>
+                  </div>
+                </div>
                 <input
                   id="cost-input"
                   type="number"
@@ -192,9 +227,26 @@ export default function App() {
               
               {!useEnteredTokens && (
                 <div className="space-y-1">
-                  <label htmlFor="manual-tokens" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
-                    Manual token count
-                  </label>
+                  <div className="flex items-center gap-2">
+                    <label htmlFor="manual-tokens" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
+                      Manual token count
+                    </label>
+                    <div className="relative group">
+                      <svg 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        className="h-3 w-3 text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 cursor-help transition-colors" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-48 text-center">
+                        Override token count with a custom number for cost estimation without typing that much text.
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800 dark:border-t-slate-700"></div>
+                      </div>
+                    </div>
+                  </div>
                   <input
                     id="manual-tokens"
                     type="number"
@@ -219,11 +271,43 @@ export default function App() {
               <label htmlFor="use-entered-tokens" className="text-xs font-medium text-orange-600 dark:text-orange-300">
                 Count entered tokens automatically
               </label>
+              <div className="relative group">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-3 w-3 text-slate-400 dark:text-slate-500 hover:text-orange-500 dark:hover:text-orange-400 cursor-help transition-colors" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-48 text-center">
+                  When checked, uses tokens from your entered text. When unchecked, allows manual token count input.
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800 dark:border-t-slate-700"></div>
+                </div>
+              </div>
             </div>
             
             {costPerMillion > 0 && (
               <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border border-orange-200 dark:border-orange-700 rounded-md p-3 mt-3">
-                <div className="text-xs font-medium text-orange-600 dark:text-orange-400 mb-1">Estimated Cost</div>
+                <div className="flex items-center gap-2 mb-1">
+                  <div className="text-xs font-medium text-orange-600 dark:text-orange-400">Estimated Cost</div>
+                  <div className="relative group">
+                    <svg 
+                      xmlns="http://www.w3.org/2000/svg" 
+                      className="h-3 w-3 text-orange-500 dark:text-orange-400 hover:text-orange-600 dark:hover:text-orange-300 cursor-help transition-colors" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-slate-800 dark:bg-slate-700 text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 w-48 text-center">
+                      Calculated as: (token count ÷ 1,000,000) × cost per million tokens. This is an approximation.
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-800 dark:border-t-slate-700"></div>
+                    </div>
+                  </div>
+                </div>
                 <div className="text-xl font-bold text-orange-800 dark:text-orange-300">
                   ${stats.estimatedCost.toFixed(6)}
                 </div>
