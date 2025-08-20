@@ -16,6 +16,18 @@ export default function App() {
   });
   const [theme, setTheme] = useState<Theme>('dark');
   const [isCopied, copy] = useCopyToClipboard();
+  const [costPerMillion, setCostPerMillion] = useState<number>(() => {
+    const savedCost = localStorage.getItem('cost-per-million');
+    return savedCost ? parseFloat(savedCost) : 0;
+  });
+  const [useEnteredTokens, setUseEnteredTokens] = useState<boolean>(() => {
+    const savedSetting = localStorage.getItem('use-entered-tokens');
+    return savedSetting ? JSON.parse(savedSetting) : true;
+  });
+  const [manualTokenCount, setManualTokenCount] = useState<number>(() => {
+    const savedCount = localStorage.getItem('manual-token-count');
+    return savedCount ? parseInt(savedCount) : 0;
+  });
 
   useEffect(() => {
     // Check for saved theme in localStorage or system preference
@@ -37,6 +49,18 @@ export default function App() {
       localStorage.setItem('tokenizer-text', text);
     }
   }, [text]);
+
+  useEffect(() => {
+    localStorage.setItem('cost-per-million', costPerMillion.toString());
+  }, [costPerMillion]);
+
+  useEffect(() => {
+    localStorage.setItem('use-entered-tokens', JSON.stringify(useEnteredTokens));
+  }, [useEnteredTokens]);
+
+  useEffect(() => {
+    localStorage.setItem('manual-token-count', manualTokenCount.toString());
+  }, [manualTokenCount]);
   
   const toggleTheme = useCallback(() => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -45,6 +69,8 @@ export default function App() {
   const stats = useMemo(() => {
     const tokenList = tokenize(text);
     const analysis = analyzeTokens(tokenList);
+    const tokenCount = useEnteredTokens ? tokenList.length : manualTokenCount;
+    const estimatedCost = costPerMillion > 0 ? (tokenCount / 1000000) * costPerMillion : 0;
     
     return {
       tokens: tokenList.length,
@@ -52,8 +78,10 @@ export default function App() {
       characters: text.length,
       tokenList: tokenList,
       analysis,
+      estimatedCost,
+      effectiveTokenCount: tokenCount,
     };
-  }, [text]);
+  }, [text, costPerMillion, useEnteredTokens, manualTokenCount]);
 
   const handleCopy = useCallback(() => {
     const tokensString = stats.tokenList.map(t => `"${t}"`).join(', ');
@@ -99,6 +127,7 @@ export default function App() {
         <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
           Analyze and visualize text tokenization for Large Language Models in real-time.
         </p>
+        
         <div className="absolute top-0 right-0 flex gap-2">
           <IconButton 
             onClick={toggleTheme} 
@@ -133,6 +162,77 @@ export default function App() {
           subtitle={stats.analysis ? `Efficiency: ${stats.analysis.efficiency}` : undefined}
           icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600 dark:text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m16-10v10M9 3h6l3 4-3 4H9L6 7l3-4z" /></svg>}
         />
+      </div>
+
+      <div className="bg-white/50 dark:bg-slate-950/70 backdrop-blur-sm rounded-lg border border-slate-200 dark:border-slate-700 p-6 mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+          </svg>
+          <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">Cost Calculator</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
+          <div className="space-y-2">
+            <label htmlFor="cost-input" className="block text-sm font-medium text-slate-600 dark:text-slate-300">
+              Cost per 1M tokens ($)
+            </label>
+            <input
+              id="cost-input"
+              type="number"
+              value={costPerMillion || ''}
+              onChange={(e) => setCostPerMillion(parseFloat(e.target.value) || 0)}
+              placeholder="0.00"
+              step="0.01"
+              min="0"
+              className="w-full px-4 py-3 text-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+            />
+          </div>
+          
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <input
+                id="use-entered-tokens"
+                type="checkbox"
+                checked={useEnteredTokens}
+                onChange={(e) => setUseEnteredTokens(e.target.checked)}
+                className="w-5 h-5 text-orange-600 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 rounded focus:ring-orange-500 focus:ring-2"
+              />
+              <label htmlFor="use-entered-tokens" className="text-sm font-medium text-slate-600 dark:text-slate-300">
+                Count entered tokens automatically
+              </label>
+            </div>
+            
+            {!useEnteredTokens && (
+              <div className="space-y-2">
+                <label htmlFor="manual-tokens" className="block text-sm font-medium text-slate-600 dark:text-slate-300">
+                  Manual token count
+                </label>
+                <input
+                  id="manual-tokens"
+                  type="number"
+                  value={manualTokenCount || ''}
+                  onChange={(e) => setManualTokenCount(parseInt(e.target.value) || 0)}
+                  placeholder="0"
+                  min="0"
+                  className="w-full px-4 py-3 text-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                />
+              </div>
+            )}
+          </div>
+          
+          {costPerMillion > 0 && (
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
+              <div className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">Estimated Cost</div>
+              <div className="text-2xl font-bold text-green-800 dark:text-green-300">
+                ${stats.estimatedCost.toFixed(6)}
+              </div>
+              <div className="text-xs text-green-600 dark:text-green-400 mt-1">
+                {useEnteredTokens ? `${stats.tokens} tokens` : `${stats.effectiveTokenCount} tokens`}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
