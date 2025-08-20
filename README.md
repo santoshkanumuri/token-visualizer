@@ -1,143 +1,97 @@
-# LLM Token Visualizer
+# LLM Token Visualizer - Free AI Token Counter & Cost Calculator
 
-A real-time tokenization visualization tool for Large Language Models. See how your text is broken down into tokens with interactive analysis and search capabilities.
+[![Live Demo](https://img.shields.io/badge/Live-Demo-orange)](https://santoshkanumuri.github.io/token-visualizer/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-![LLM Token Visualizer](https://img.shields.io/badge/React-19.1.1-blue?style=flat-square&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)
+A powerful, free online tool for visualizing, counting, and calculating costs for AI tokens used by Large Language Models like ChatGPT, GPT-4, Claude, and more.
 
-## ✨ Features
+## 🚀 Features
 
-- **Real-time Tokenization**: See tokens as you type with color-coded visualization
-- **Advanced Search**: Search and filter tokens with highlighting
-- **Detailed Analytics**: Token statistics, word percentages, and efficiency metrics
-- **Persistent Storage**: Your text and theme preferences are automatically saved
-- **Keyboard Shortcuts**: Power user shortcuts for faster workflow
-- **Dark/Light Mode**: Toggle between themes with system preference detection
-- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Real-time Token Analysis**: Instant token counting as you type
+- **Multi-color Visualization**: Color-coded tokens for easy analysis
+- **Cost Calculator**: Estimate API costs for different LLM providers
+- **Prompt Engineering**: Perfect for optimizing ChatGPT and GPT-4 prompts
+- **No Registration**: Free to use without any signup
+- **Mobile Responsive**: Works on all devices
+- **Dark/Light Theme**: Choose your preferred interface
 
-## 🚀 Quick Start
+## 🎯 Use Cases
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
+### For Developers
+- **API Cost Optimization**: Calculate exact costs before making API calls
+- **Token Limit Planning**: Stay within model token limits (4K, 8K, 32K, 128K)
+- **Prompt Engineering**: Optimize prompts for better AI responses
+- **Budget Management**: Track and predict AI usage costs
 
-### Installation
+### For AI Enthusiasts
+- **ChatGPT Optimization**: Understand how your prompts are tokenized
+- **Learning Tool**: Visualize how different models handle text
+- **Experimentation**: Test different prompt styles and lengths
 
-1. Clone the repository:
+## �️ Supported Models
+
+- **OpenAI**: GPT-4, GPT-3.5, ChatGPT
+- **Anthropic**: Claude, Claude-2
+- **Google**: PaLM, Gemini
+- **Meta**: LLaMA models
+- **And many more LLMs**
+
+## 💰 Cost Calculation
+
+Enter the cost per million tokens for your specific AI provider:
+- OpenAI GPT-4: ~$30/1M tokens
+- OpenAI GPT-3.5: ~$2/1M tokens
+- Anthropic Claude: ~$11/1M tokens
+- Custom pricing supported
+
+## 🚀 Getting Started
+
+1. Visit [https://santoshkanumuri.github.io/token-visualizer/](https://santoshkanumuri.github.io/token-visualizer/)
+2. Enter your text or prompt
+3. View real-time token count and visualization
+4. Set cost per million tokens to see price estimates
+5. Optimize your prompts based on the analysis
+
+## � Development
+
+Built with:
+- **React 19** - Modern UI framework
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **Vite** - Fast build tool
+
+### Local Development
+
 ```bash
-git clone https://github.com/yourusername/llm-token-visualizer.git
-cd llm-token-visualizer
-```
+# Clone the repository
+git clone https://github.com/santoshkanumuri/token-visualizer.git
 
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
 
-3. Start the development server:
-```bash
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+## 📊 SEO Keywords
 
-## 🎯 Usage
-
-### Basic Tokenization
-1. Enter text in the left panel
-2. Watch real-time token analysis update above
-3. View color-coded tokens on the right
-
-### Advanced Features
-- **Search Tokens**: Use the search bar in the token visualizer to find specific tokens
-- **Keyboard Shortcuts**:
-  - `Ctrl+S`: Copy tokens to clipboard
-  - `Ctrl+K`: Toggle theme
-  - `Ctrl+L`: Clear text
-- **Statistics**: View detailed metrics including:
-  - Token count with average length
-  - Word percentage of total tokens
-  - Character count with efficiency metrics
-
-## 🔧 How Tokenization Works
-
-This tool uses a simplified approximation of GPT-2/3 tokenization:
-
-- **Contractions**: Split into separate tokens (`don't` → `["don", "'t"]`)
-- **Words**: Groups of letters become individual tokens
-- **Numbers**: Groups of digits become tokens
-- **Punctuation**: Non-letter/number characters become tokens
-- **Whitespace**: Spaces and whitespace characters become tokens
-
-⚠️ **Note**: This is an educational approximation and may not perfectly match actual model tokenizers.
-
-## 📊 Statistics Explained
-
-- **Tokens**: Total number of tokens generated
-- **Words**: Traditional word count (space-separated)
-- **Characters**: Total character count
-- **Average Length**: Mean characters per token
-- **Word Percentage**: Percentage of tokens that are words
-- **Efficiency**: Tokens per character ratio
-
-## 🎨 Customization
-
-### Themes
-- **Light Mode**: Clean, bright interface
-- **Dark Mode**: Easy on the eyes for extended use
-- **Auto-detection**: Respects system preferences
-
-### Token Colors
-Tokens are color-coded using a rotating palette of 7 colors for easy identification and pattern recognition.
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React 19.1.1 with TypeScript
-- **Styling**: Tailwind CSS
-- **Build Tool**: Vite
-- **State Management**: React Hooks
-- **Icons**: Heroicons (SVG)
-
-## 📁 Project Structure
-
-```
-llm-token-visualizer/
-├── components/          # React components
-│   ├── IconButton.tsx
-│   ├── StatCard.tsx
-│   └── TokenVisualizer.tsx
-├── hooks/              # Custom React hooks
-│   └── useCopyToClipboard.ts
-├── lib/                # Utility functions
-│   └── tokenizer.ts
-├── App.tsx             # Main application component
-├── constants.ts        # App constants and configurations
-└── index.html          # HTML template
-```
+This tool helps with: token counter, LLM tokens, AI token calculator, ChatGPT tokens, GPT-4 cost calculator, prompt engineering, tokenization visualization, AI cost estimator, OpenAI tokens, Claude tokens, token visualizer, AI budget planning, prompt optimization, LLM cost analysis.
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📝 License
+## � License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🌟 Star History
 
-- Built for educational purposes to understand LLM tokenization
-- Inspired by the need for better prompt engineering tools
-- Uses simplified tokenization patterns based on GPT models
-
-## 📞 Support
-
-If you have any questions or suggestions, please open an issue on GitHub.
+If you find this tool useful, please consider giving it a star ⭐
 
 ---
 
-**Disclaimer**: Tokenization is a best-effort approximation based on common patterns and may not perfectly match the output of specific models (e.g., Gemini, GPT-4).
+**Keywords**: token counter, LLM tokenizer, AI cost calculator, ChatGPT token counter, GPT-4 cost estimator, prompt engineering tool, AI token visualizer, OpenAI cost calculator, Claude token counter, free AI tools

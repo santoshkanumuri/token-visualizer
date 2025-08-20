@@ -119,16 +119,16 @@ export default function App() {
   }, [handleCopy, toggleTheme, handleClear]);
 
   return (
-    <div className="h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300 flex flex-col w-full p-4 sm:p-6 lg:p-8 overflow-hidden">
-      <header className="relative text-center mb-6">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-blue-600 dark:from-orange-400 dark:to-blue-500 pb-2">
+    <div className="min-h-screen bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans transition-colors duration-300 flex flex-col w-full p-4 sm:p-6 lg:p-8">
+      <header className="relative text-center mb-4">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-orange-600 dark:text-orange-400 pb-2">
           LLM Token Visualizer
         </h1>
-        <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl mx-auto">
+        <p className="text-orange-500 dark:text-orange-300 mt-2 max-w-2xl mx-auto">
           Analyze and visualize text tokenization for Large Language Models in real-time.
         </p>
         
-        <div className="absolute top-0 right-0 flex gap-2">
+        <nav className="absolute top-0 right-0 flex gap-2" aria-label="Theme controls">
           <IconButton 
             onClick={toggleTheme} 
             aria-label="Toggle theme"
@@ -140,10 +140,10 @@ export default function App() {
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
             )}
           </IconButton>
-        </div>
+        </nav>
       </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-6" aria-label="Token statistics and cost calculator">
         <StatCard
           label="Tokens"
           value={stats.tokens}
@@ -162,78 +162,79 @@ export default function App() {
           subtitle={stats.analysis ? `Efficiency: ${stats.analysis.efficiency}` : undefined}
           icon={<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600 dark:text-orange-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10m16-10v10M9 3h6l3 4-3 4H9L6 7l3-4z" /></svg>}
         />
-      </div>
-
-      <div className="bg-white/50 dark:bg-slate-950/70 backdrop-blur-sm rounded-lg border border-slate-200 dark:border-slate-700 p-6 mb-6">
-        <div className="flex items-center gap-3 mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-          </svg>
-          <h2 className="text-xl font-semibold text-slate-800 dark:text-slate-200">Cost Calculator</h2>
-        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-end">
-          <div className="space-y-2">
-            <label htmlFor="cost-input" className="block text-sm font-medium text-slate-600 dark:text-slate-300">
-              Cost per 1M tokens ($)
-            </label>
-            <input
-              id="cost-input"
-              type="number"
-              value={costPerMillion || ''}
-              onChange={(e) => setCostPerMillion(parseFloat(e.target.value) || 0)}
-              placeholder="0.00"
-              step="0.01"
-              min="0"
-              className="w-full px-4 py-3 text-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-            />
+        {/* Cost Calculator Card */}
+        <article className="lg:col-span-2 xl:col-span-2 bg-white/50 dark:bg-slate-950/70 backdrop-blur-sm rounded-lg border border-slate-200 dark:border-slate-700 p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-orange-600 dark:text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+            </svg>
+            <h2 className="text-lg font-semibold text-orange-800 dark:text-orange-200">Cost Calculator</h2>
           </div>
           
           <div className="space-y-3">
-            <div className="flex items-center gap-3">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-3">
+              <div className="space-y-1">
+                <label htmlFor="cost-input" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
+                  Cost per 1M tokens ($)
+                </label>
+                <input
+                  id="cost-input"
+                  type="number"
+                  value={costPerMillion || ''}
+                  onChange={(e) => setCostPerMillion(parseFloat(e.target.value) || 0)}
+                  placeholder="0.00"
+                  step="0.01"
+                  min="0"
+                  className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                />
+              </div>
+              
+              {!useEnteredTokens && (
+                <div className="space-y-1">
+                  <label htmlFor="manual-tokens" className="block text-xs font-medium text-orange-600 dark:text-orange-300">
+                    Manual token count
+                  </label>
+                  <input
+                    id="manual-tokens"
+                    type="number"
+                    value={manualTokenCount || ''}
+                    onChange={(e) => setManualTokenCount(parseInt(e.target.value) || 0)}
+                    placeholder="0"
+                    min="0"
+                    className="w-full px-3 py-2 text-sm bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
+                  />
+                </div>
+              )}
+            </div>
+            
+            <div className="flex items-center gap-2">
               <input
                 id="use-entered-tokens"
                 type="checkbox"
                 checked={useEnteredTokens}
                 onChange={(e) => setUseEnteredTokens(e.target.checked)}
-                className="w-5 h-5 text-orange-600 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 rounded focus:ring-orange-500 focus:ring-2"
+                className="w-4 h-4 text-orange-600 bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 rounded focus:ring-orange-500 focus:ring-2"
               />
-              <label htmlFor="use-entered-tokens" className="text-sm font-medium text-slate-600 dark:text-slate-300">
+              <label htmlFor="use-entered-tokens" className="text-xs font-medium text-orange-600 dark:text-orange-300">
                 Count entered tokens automatically
               </label>
             </div>
             
-            {!useEnteredTokens && (
-              <div className="space-y-2">
-                <label htmlFor="manual-tokens" className="block text-sm font-medium text-slate-600 dark:text-slate-300">
-                  Manual token count
-                </label>
-                <input
-                  id="manual-tokens"
-                  type="number"
-                  value={manualTokenCount || ''}
-                  onChange={(e) => setManualTokenCount(parseInt(e.target.value) || 0)}
-                  placeholder="0"
-                  min="0"
-                  className="w-full px-4 py-3 text-lg bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200"
-                />
+            {costPerMillion > 0 && (
+              <div className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border border-orange-200 dark:border-orange-700 rounded-md p-3 mt-3">
+                <div className="text-xs font-medium text-orange-600 dark:text-orange-400 mb-1">Estimated Cost</div>
+                <div className="text-xl font-bold text-orange-800 dark:text-orange-300">
+                  ${stats.estimatedCost.toFixed(6)}
+                </div>
+                <div className="text-xs text-orange-600 dark:text-orange-400 mt-1">
+                  {useEnteredTokens ? `${stats.tokens} tokens` : `${stats.effectiveTokenCount} tokens`}
+                </div>
               </div>
             )}
           </div>
-          
-          {costPerMillion > 0 && (
-            <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 border border-green-200 dark:border-green-700 rounded-lg p-4">
-              <div className="text-sm font-medium text-green-600 dark:text-green-400 mb-1">Estimated Cost</div>
-              <div className="text-2xl font-bold text-green-800 dark:text-green-300">
-                ${stats.estimatedCost.toFixed(6)}
-              </div>
-              <div className="text-xs text-green-600 dark:text-green-400 mt-1">
-                {useEnteredTokens ? `${stats.tokens} tokens` : `${stats.effectiveTokenCount} tokens`}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+        </article>
+      </section>
 
       <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 min-h-0">
         <div className="flex flex-col h-full min-h-0 relative group">
@@ -241,7 +242,7 @@ export default function App() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="Enter text here to see the magic..."
-            className="w-full h-full p-4 bg-white/50 dark:bg-slate-950/70 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-600 text-lg leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 font-mono backdrop-blur-sm overflow-y-auto"
+            className="w-full h-full p-4 bg-white/50 dark:bg-slate-950/70 rounded-lg border border-slate-200 dark:border-slate-700 text-orange-800 dark:text-orange-200 placeholder-orange-500 dark:placeholder-orange-400 text-lg leading-relaxed resize-none focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300 font-mono backdrop-blur-sm overflow-y-auto"
           />
            <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <IconButton 
@@ -271,7 +272,7 @@ export default function App() {
         </div>
       </main>
       
-      <footer className="text-center mt-6 text-xs text-slate-500 dark:text-slate-400">
+      <footer className="text-center mt-6 text-xs text-orange-500 dark:text-orange-400">
         <p>
           Disclaimer: Tokenization is a best-effort approximation based on common patterns and may not perfectly match the output of specific models (e.g., Gemini, GPT-4).
         </p>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santoshkanumuri.github.io/token-visualizer/sitemap.xml

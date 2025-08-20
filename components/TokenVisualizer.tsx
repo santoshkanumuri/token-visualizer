@@ -38,10 +38,10 @@ const TokenVisualizer: React.FC<TokenVisualizerProps> = ({ tokens, theme }) => {
             placeholder="Search tokens..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-3 py-2 bg-white/70 dark:bg-slate-800/70 rounded-md border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-slate-200 placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent transition-all duration-300"
+            className="w-full px-3 py-2 bg-white/70 dark:bg-slate-800/70 rounded-md border border-slate-200 dark:border-slate-600 text-orange-800 dark:text-orange-200 placeholder-orange-500 dark:placeholder-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-300"
           />
           {searchTerm && (
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-slate-500 dark:text-slate-400">
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 text-xs text-orange-500 dark:text-orange-400">
               {filteredTokens.length}/{tokens.length}
             </div>
           )}
@@ -68,7 +68,7 @@ const TokenVisualizer: React.FC<TokenVisualizerProps> = ({ tokens, theme }) => {
               );
             })
           ) : (
-            <div className="text-slate-500 dark:text-slate-600 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
+            <div className="text-orange-500 dark:text-orange-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2">
                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}><path strokeLinecap="round" strokeLinejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M12 6V4m0 16v-2M8 12a4 4 0 118 0 4 4 0 01-8 0z" /></svg>
               <span>Token visualization appears here</span>
             </div>
