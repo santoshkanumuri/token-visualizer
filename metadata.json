@@ -1,0 +1,5 @@
+{
+  "name": "LLM Token Visualizer",
+  "description": "A powerful and intuitive tool for developers and prompt engineers to visualize how text is tokenized by Large Language Models. Features real-time statistics for tokens, words, and characters, with a visually appealing color-coded output.",
+  "requestFramePermissions": []
+}
